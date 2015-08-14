@@ -1,0 +1,68 @@
+package Analizadores; 
+
+import Logica.*;
+import java_cup.runtime.*; 
+import javax.swing.JOptionPane;
+ 
+parser code 
+{: 
+private String nombre;
+private String tipo;
+private String texto;
+
+public void ejecutar(){
+	if(!Practica1.getLista_carpeta().isEmpty()){ //si la lista de carpetas o esta vacia
+		if(Practica1.getLista_carpeta().size() > 1){ //si la lista de carpetas tiene mas de un elemento
+			String aux = ""; 
+			int atras = 0;
+			atras =  Practica1.getLista_carpeta().size() - 1; //se crea la carpeta raiz
+			aux = Practica1.getLista_carpeta().get(atras).crear_carpeta();
+			for(int x =atras -1; x > -1; x--){ //se crea el contenido del interior de la carpeta
+				Practica1.getLista_carpeta().get(x).setPath(aux);
+				aux = Practica1.getLista_carpeta().get(x).crear_carpeta();
+				Practica1.getLista_carpeta().get(x).crear_contenido();
+			}
+		}else{
+			String aux="";
+			aux = Practica1.getLista_carpeta().get(0).crear_carpeta();
+			if(!Practica1.getLista_documento().isEmpty()){
+				for(int x = 0; x < Practica1.getLista_carpeta().size(); x++){
+				Practica1.getLista_documento().get(x).crear_documento(aux);
+				}
+			}
+			Practica1.getLista_carpeta().get(0).crear_contenido();
+		}
+	}
+}//fin del metodo ejecutar
+
+/**Metodo al que se llama automáticamente ante algún error sintactico.*/ 
+public void syntax_error(Symbol s){ 
+ System.out.println("Error en la Línea " + (s.right+1) +" Columna " +s.left+ ". Identificador " +s.value + " no reconocido." ); 
+} 
+ /**Metodo al que se llama en el momento en que ya no es posible una recuperación de errores.*/ 
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+ System.out.println("Error en la Línea " + (s.right+1)+ "Columna "+s.left+". Identificador " + s.value + " no reconocido."); 
+} 
+:} 
+
+terminal r_graficar, r_circulo, r_cuadrado, r_rectangulo, r_poligono, s_parentesisa, numero, numero_entero,
+s_suma, s_resta, s_multiplicacion, s_division, s_coma, r_azul, r_rojo, r_verde, r_amarillo, r_naranja, r_morado,
+r_cafe, r_negro, s_parenctesisc; 
+
+non terminal INICIO;
+  
+start with INICIO;  
+
+INICIO ::= GRAFICAR
+
+
+
+
+
+												  
+
+
+
+
+
+				
