@@ -1,39 +1,20 @@
 package Analizadores; 
 
-import Logica.*;
+import Figuras.*;
 import java_cup.runtime.*; 
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
  
 parser code 
 {: 
-private String nombre;
-private String tipo;
-private String texto;
 
-public void ejecutar(){
-	if(!Practica1.getLista_carpeta().isEmpty()){ //si la lista de carpetas o esta vacia
-		if(Practica1.getLista_carpeta().size() > 1){ //si la lista de carpetas tiene mas de un elemento
-			String aux = ""; 
-			int atras = 0;
-			atras =  Practica1.getLista_carpeta().size() - 1; //se crea la carpeta raiz
-			aux = Practica1.getLista_carpeta().get(atras).crear_carpeta();
-			for(int x =atras -1; x > -1; x--){ //se crea el contenido del interior de la carpeta
-				Practica1.getLista_carpeta().get(x).setPath(aux);
-				aux = Practica1.getLista_carpeta().get(x).crear_carpeta();
-				Practica1.getLista_carpeta().get(x).crear_contenido();
-			}
-		}else{
-			String aux="";
-			aux = Practica1.getLista_carpeta().get(0).crear_carpeta();
-			if(!Practica1.getLista_documento().isEmpty()){
-				for(int x = 0; x < Practica1.getLista_carpeta().size(); x++){
-				Practica1.getLista_documento().get(x).crear_documento(aux);
-				}
-			}
-			Practica1.getLista_carpeta().get(0).crear_contenido();
-		}
-	}
-}//fin del metodo ejecutar
+private boolean correcto = false;
+
+//listas de los figuras encontradas
+ArrayList<Circulo> lista_circulos;
+ArrayList<Cuadrado> lista_cuadrados;
+ArrayList<Rectangulo> lista_rectangulos;
+ArrayList<Linea> lista_lineas;
+ArrayList<Poligono> lista_poligonos;
 
 /**Metodo al que se llama automáticamente ante algún error sintactico.*/ 
 public void syntax_error(Symbol s){ 
@@ -45,24 +26,57 @@ public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
 } 
 :} 
 
-terminal r_graficar, r_circulo, r_cuadrado, r_rectangulo, r_poligono, s_parentesisa, numero, numero_entero,
+terminal r_graficar, r_circulo, r_cuadrado, r_rectangulo, r_linea, r_poligono, s_parentesisa, numero, numero_entero,
 s_suma, s_resta, s_multiplicacion, s_division, s_coma, r_azul, r_rojo, r_verde, r_amarillo, r_naranja, r_morado,
-r_cafe, r_negro, s_parenctesisc; 
+r_cafe, r_negro, s_parentesisc; 
 
-non terminal INICIO;
+non terminal INICIO, GRAFICAS, GRAFICA, FIGURAS, CIRCULO, CUADRADO, RECTANGULO, LINEA, POLIGONO, OPERACION, OPERANDOA, 
+OPERANDOB, OPERANDOC, OPERANDOF, COLOR;
   
 start with INICIO;  
 
-INICIO ::= GRAFICAR
+INICIO ::=   GRAFICAS{:parser.correcto = true;:};
 
+GRAFICAS ::= GRAFICA FIGURAS GRAFICAS
+			 |GRAFICA FIGURAS; 
 
+FIGURAS ::=  CIRCULO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
+			|CUADRADO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
+			|RECTANGULO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
+			|LINEA s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
+			|POLIGONO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc;
 
+GRAFICA ::=  r_graficar;
 
+CIRCULO ::=  r_circulo;
 
-												  
+CUADRADO ::= r_cuadrado;   
 
+RECTANGULO ::= r_rectangulo;
 
+LINEA ::=    r_linea;
 
+POLIGONO ::= r_poligono;
 
+OPERACION ::=  OPERANDOA s_suma OPERANDOB
+			   |OPERANDOA s_resta OPERANDOB	
+			   |OPERANDOB;
 
-				
+OPERANDOB ::= 	OPERANDOB s_multiplicacion OPERANDOC
+			   |OPERANDOB s_division OPERANDOC
+			   |OPERANDOC;
+
+OPERANDOC ::=	s_parentesisa OPERACION s_parentesisc
+			   |OPERANDOF;
+
+OPERANDOF ::=	numero
+			   |numero_entero;
+
+COLOR ::=	r_azul
+		   |r_rojo
+		   |r_verde
+		   |r_amarillo
+		   |r_naranja
+		   |r_morado
+		   |r_cafe
+		   |r_negro;

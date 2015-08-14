@@ -27,6 +27,7 @@ entero = (numero)(punto)(numero)
 "circulo"       {return new Symbol(Tabla_simbolos.r_circulo, yycolumn,yyline,new String(yytext()));}
 "cuadrado"      {return new Symbol(Tabla_simbolos.r_cuadrado, yycolumn,yyline,new String(yytext()));}
 "rectangulo"    {return new Symbol(Tabla_simbolos.r_rectangulo, yycolumn,yyline,new String(yytext()));}
+"linea"    		{return new Symbol(Tabla_simbolos.r_linea, yycolumn,yyline,new String(yytext()));}
 "poligono"      {return new Symbol(Tabla_simbolos.r_poligono, yycolumn,yyline,new String(yytext()));}
 "("             {return new Symbol(tabla_simbolos.s_parentesisa, yycolumn,yyline,new String(yytext()));}
 {numero}		{return new Symbol(Tabla_simbolos.numero, yycolumn,yyline,new String(yytext()));}
@@ -35,7 +36,7 @@ entero = (numero)(punto)(numero)
 "-"				{return new Symbol(Tabla_simbolos.s_resta, yycolumn,yyline,new String(yytext()));}
 "*"				{return new Symbol(Tabla_simbolos.s_multiplicacion, yycolumn,yyline,new String(yytext()));}
 "/"				{return new Symbol(Tabla_simbolos.s_division, yycolumn,yyline,new String(yytext()));}
-","				{return new Symbol(Tabla_simbolos.s_punto, yycolumn,yyline,new String(yytext()));}
+","				{return new Symbol(Tabla_simbolos.s_coma, yycolumn,yyline,new String(yytext()));}
 "azul"          {return new Symbol(Tabla_simbolos.r_azul, yycolumn,yyline,new String(yytext()));}
 "rojo"          {return new Symbol(Tabla_simbolos.r_rojo, yycolumn,yyline,new String(yytext()));}
 "verde"         {return new Symbol(Tabla_simbolos.r_verde, yycolumn,yyline,new String(yytext()));}
@@ -44,7 +45,7 @@ entero = (numero)(punto)(numero)
 "morado"        {return new Symbol(Tabla_simbolos.r_morado, yycolumn,yyline,new String(yytext()));}
 "cafe"          {return new Symbol(Tabla_simbolos.r_cafe, yycolumn,yyline,new String(yytext()));}
 "negro"         {return new Symbol(Tabla_simbolos.r_negro, yycolumn,yyline,new String(yytext()));}
-")"             {return new Symbol(tabla_simbolos.s_parentesisc, yycolumn,yyline,new String(yytext()));}
+")"             {return new Symbol(Tabla_simbolos.s_parentesisc, yycolumn,yyline,new String(yytext()));}
 
 [ \t\r\f\n]+ { /* Se ignoran */}  
 
