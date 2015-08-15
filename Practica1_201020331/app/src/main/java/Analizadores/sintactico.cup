@@ -16,6 +16,10 @@ ArrayList<Rectangulo> lista_rectangulos;
 ArrayList<Linea> lista_lineas;
 ArrayList<Poligono> lista_poligonos;
 
+public boolean get_Estado(){
+	return correcto;
+}
+
 /**Metodo al que se llama automáticamente ante algún error sintactico.*/ 
 public void syntax_error(Symbol s){ 
  System.out.println("Error en la Línea " + (s.right+1) +" Columna " +s.left+ ". Identificador " +s.value + " no reconocido." ); 

@@ -5,10 +5,9 @@
 
 package Analizadores;
 
-import java.util.ArrayList;
-
 import Figuras.*;
 import java_cup.runtime.*;
+import java.util.ArrayList;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20150326 (SVN rev 63) generated parser.
@@ -221,6 +220,10 @@ ArrayList<Cuadrado> lista_cuadrados;
 ArrayList<Rectangulo> lista_rectangulos;
 ArrayList<Linea> lista_lineas;
 ArrayList<Poligono> lista_poligonos;
+
+public boolean get_Estado(){
+	return correcto;
+}
 
 /**Metodo al que se llama automáticamente ante algún error sintactico.*/ 
 public void syntax_error(Symbol s){ 
