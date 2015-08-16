@@ -19,6 +19,14 @@ public class Linea {
         this.color = null;
     }
 
+    public Linea(int x, int y, int x2, int y2, String c){
+        this.pos_x = x;
+        this.pos_y = y;
+        this.pos_x2 = x2;
+        this.pos_y2 = y2;
+        this.color = c;
+    }
+
     public int getPos_x() {
         return pos_x;
     }

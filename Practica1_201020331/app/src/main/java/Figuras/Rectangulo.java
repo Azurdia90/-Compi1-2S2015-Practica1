@@ -18,6 +18,15 @@ public class Rectangulo {
         this.ancho = 0;
         this.color = null;
     }
+
+    public Rectangulo(int x, int y, int a, int an, String c){
+        this.pos_x = x;
+        this.pos_y = y;
+        this.alto  = a;
+        this.ancho = an;
+        this.color = c;
+    }
+
     //GETTER AND SETTER DE LA CLASE RECTANGULO
     public int getPos_x() {
         return pos_x;

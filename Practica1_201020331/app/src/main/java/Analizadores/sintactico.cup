@@ -9,9 +9,6 @@ parser code
 
 //variables utilizadas para el analisis sintactico
 private boolean correcto = false;
-private int operando_a;
-private int operando_b;
-
 
 private Circulo circulo;
 private Cuadrado cuadrado;
@@ -20,15 +17,16 @@ private Linea linea;
 private Poligono poligono;
 
 //listas de los figuras encontradas
-private ArrayList<Circulo> lista_circulos;
-private ArrayList<Cuadrado> lista_cuadrados;
-private ArrayList<Rectangulo> lista_rectangulos;
-private ArrayList<Linea> lista_lineas;
-private ArrayList<Poligono> lista_poligonos;
+public ArrayList<Circulo> lista_circulos = new ArrayList<Circulo>();
+private ArrayList<Cuadrado> lista_cuadrados = new ArrayList<Cuadrado>();
+private ArrayList<Rectangulo> lista_rectangulos = new ArrayList<Rectangulo>();
+private ArrayList<Linea> lista_lineas = new ArrayList<Linea>();
+private ArrayList<Poligono> lista_poligonos = new ArrayList<Poligono>();
 
 public boolean get_Estado(){
 	return correcto;
 }
+
 
 /**Metodo al que se llama automáticamente ante algún error sintactico.*/ 
 public void syntax_error(Symbol s){ 
@@ -54,25 +52,28 @@ INICIO ::=   GRAFICAS{:parser.correcto = true;:};
 GRAFICAS ::= GRAFICA FIGURAS GRAFICAS
 			 |GRAFICA FIGURAS; 
 
-FIGURAS ::=  CIRCULO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
-			|CUADRADO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
-			|RECTANGULO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
-			|LINEA s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc
-			|POLIGONO s_parentesisa OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma OPERACION s_coma COLOR s_parentesisc;
+FIGURAS ::=  CIRCULO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:r s_coma COLOR:c s_parentesisc
+			{:circulo = new Circulo((Integer)x,(Integer)y,(Integer)r,c.toString());lista_circulos.add(circulo);:}
+			|CUADRADO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:t s_coma COLOR:c s_parentesisc
+			{:cuadrado = new Cuadrado((Integer)x,(Integer)y,(Integer)t,c.toString()); lista_cuadrados.add(cuadrado);:}
+			|RECTANGULO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:a s_coma OPERANDOA:an s_coma COLOR:c s_parentesisc
+			{:rectangulo = new Rectangulo((Integer)x,(Integer)y,(Integer)a,(Integer)an,c.toString()); lista_rectangulos.add(rectangulo);:}
+			|LINEA s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:x2 s_coma OPERANDOA:y2 s_coma COLOR:c s_parentesisc
+			{:linea = new Linea((Integer)x,(Integer)y,(Integer)x2,(Integer)y2,c.toString()); lista_lineas.add(linea);:}			
+			|POLIGONO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:l s_coma OPERANDOA:a s_coma OPERANDOA:ld s_coma COLOR:c s_parentesisc
+			{:poligono = new Poligono((Integer)x,(Integer)y,(Integer)l,(Integer)a,(Integer)ld,c.toString()); lista_poligonos.add(poligono);:};
 
-GRAFICA ::=  r_graficar;
+GRAFICA ::=  r_graficar {:RESULT = "graficar";:};
 
-CIRCULO ::=  r_circulo;
+CIRCULO ::=  r_circulo {:RESULT = "circulo";:};
 
-CUADRADO ::= r_cuadrado;   
+CUADRADO ::= r_cuadrado {:RESULT = "cuadrado";:};   
 
-RECTANGULO ::=  r_rectangulo;
+RECTANGULO ::=  r_rectangulo {:RESULT = "rectangulo";:};
 
-LINEA ::=   r_linea;
+LINEA ::=   r_linea {:RESULT = "linea";:};
 
-POLIGONO ::= r_poligono;
-
-OPERACION ::= 	OPERANDOA:n {:RESULT = n;:};
+POLIGONO ::= r_poligono {:RESULT = "poligono";:};
 
 OPERANDOA ::= 	OPERANDOA:a s_suma OPERANDOB:b  {:RESULT = (Integer)a + (Integer)b;:}
 			   |OPERANDOA:a s_resta OPERANDOB:b {:RESULT = (Integer)a - (Integer)b;:}
@@ -88,11 +89,11 @@ OPERANDOC ::=	s_parentesisa OPERACION:n s_parentesisc{:RESULT = n;:}
 OPERANDOF ::=	numero : n      {:RESULT = n;:}
 			   |numero_entero:n {:RESULT = n;:};
 
-COLOR ::=	r_azul
-		   |r_rojo
-		   |r_verde
-		   |r_amarillo
-		   |r_naranja
-		   |r_morado
-		   |r_cafe
-		   |r_negro;
+COLOR ::=	r_azul      {:RESULT = "azul";:}
+		   |r_rojo      {:RESULT = "rojo";:}
+		   |r_verde     {:RESULT = "verde";:}
+		   |r_amarillo  {:RESULT = "amarillo";:}
+		   |r_naranja   {:RESULT = "naranja";:}
+		   |r_morado    {:RESULT = "morado";:}
+		   |r_cafe      {:RESULT = "cafe";:}
+		   |r_negro     {:RESULT = "negro";:};   

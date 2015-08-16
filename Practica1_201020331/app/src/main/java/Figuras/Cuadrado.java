@@ -17,6 +17,13 @@ public class Cuadrado {
         color = null;
     }
 
+    public Cuadrado(int x, int y, int t, String c){
+        pos_x = x;
+        pos_y = y;
+        tamaño = t;
+        color = c;
+    }
+
     public int getPos_x() {
         return pos_x;
     }

@@ -17,6 +17,13 @@ public class Circulo {
         color = null;
     }
 
+    public Circulo(int x, int y, int r, String c){
+        pos_x = x;
+        pos_y = y;
+        radio = r;
+        color = c;
+    }
+
     public int getPos_y() {
         return pos_y;
     }

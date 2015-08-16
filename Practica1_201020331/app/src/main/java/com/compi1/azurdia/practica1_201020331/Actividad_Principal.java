@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Analizadores.*;
+import Figuras.*;
 
 public class Actividad_Principal extends AppCompatActivity {
 
@@ -61,7 +62,9 @@ public class Actividad_Principal extends AppCompatActivity {
     public void click_compilar(View v) {
         String entrada = eT_entrada.getText().toString();
         if (analizar(entrada) == true){
-            Toast toast = Toast.makeText(this, "Si funciono", Toast.LENGTH_SHORT);
+            Circulo circulo;
+            circulo = analisis_sintactico.lista_circulos.get(0);
+            Toast toast = Toast.makeText(this, circulo.getColor(), Toast.LENGTH_SHORT);
             toast.show();
         }else{
             Toast toast = Toast.makeText(this, "No funciono", Toast.LENGTH_SHORT);

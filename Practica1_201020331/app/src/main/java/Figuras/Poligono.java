@@ -20,6 +20,14 @@ public class Poligono {
         this.lados = 0;
         this.color = null;
     }
+    public Poligono(int x, int y, int l, int a, int ld, String c){
+        this. pos_x = x;
+        this.pos_y = y;
+        this.largo = l;
+        this.alto = a;
+        this.lados = ld;
+        this.color = c;
+    }
 
     public int getPos_x() {
         return pos_x;
