@@ -7,14 +7,24 @@ import java.util.ArrayList;
 parser code 
 {: 
 
+//variables utilizadas para el analisis sintactico
 private boolean correcto = false;
+private int operando_a;
+private int operando_b;
+
+
+private Circulo circulo;
+private Cuadrado cuadrado;
+private Rectangulo rectangulo;
+private Linea linea;
+private Poligono poligono;
 
 //listas de los figuras encontradas
-ArrayList<Circulo> lista_circulos;
-ArrayList<Cuadrado> lista_cuadrados;
-ArrayList<Rectangulo> lista_rectangulos;
-ArrayList<Linea> lista_lineas;
-ArrayList<Poligono> lista_poligonos;
+private ArrayList<Circulo> lista_circulos;
+private ArrayList<Cuadrado> lista_cuadrados;
+private ArrayList<Rectangulo> lista_rectangulos;
+private ArrayList<Linea> lista_lineas;
+private ArrayList<Poligono> lista_poligonos;
 
 public boolean get_Estado(){
 	return correcto;
@@ -56,25 +66,27 @@ CIRCULO ::=  r_circulo;
 
 CUADRADO ::= r_cuadrado;   
 
-RECTANGULO ::= r_rectangulo;
+RECTANGULO ::=  r_rectangulo;
 
-LINEA ::=    r_linea;
+LINEA ::=   r_linea;
 
 POLIGONO ::= r_poligono;
 
-OPERACION ::=  OPERANDOA s_suma OPERANDOB
-			   |OPERANDOA s_resta OPERANDOB	
-			   |OPERANDOB;
+OPERACION ::= 	OPERANDOA:n {:RESULT = n;:};
 
-OPERANDOB ::= 	OPERANDOB s_multiplicacion OPERANDOC
-			   |OPERANDOB s_division OPERANDOC
-			   |OPERANDOC;
+OPERANDOA ::= 	OPERANDOA:a s_suma OPERANDOB:b  {:RESULT = (Integer)a + (Integer)b;:}
+			   |OPERANDOA:a s_resta OPERANDOB:b {:RESULT = (Integer)a - (Integer)b;:}
+			   |OPERANDOB:n {:RESULT = n;:};
 
-OPERANDOC ::=	s_parentesisa OPERACION s_parentesisc
-			   |OPERANDOF;
+OPERANDOB ::= 	OPERANDOB:a s_multiplicacion OPERANDOC:b  {:RESULT = (Integer)a * (Integer)b;:}
+			   |OPERANDOB:a s_division OPERANDOC:b         {:RESULT = (Integer)a / (Integer)b;:}
+			   |OPERANDOC:n {:RESULT = n;:};
 
-OPERANDOF ::=	numero
-			   |numero_entero;
+OPERANDOC ::=	s_parentesisa OPERACION:n s_parentesisc{:RESULT = n;:}
+			   |OPERANDOF:n {:RESULT = n;:};
+
+OPERANDOF ::=	numero : n      {:RESULT = n;:}
+			   |numero_entero:n {:RESULT = n;:};
 
 COLOR ::=	r_azul
 		   |r_rojo

@@ -29,7 +29,7 @@ entero = (numero)(punto)(numero)
 "rectangulo"    {return new Symbol(Tabla_simbolos.r_rectangulo, yycolumn,yyline,new String(yytext()));}
 "linea"    		{return new Symbol(Tabla_simbolos.r_linea, yycolumn,yyline,new String(yytext()));}
 "poligono"      {return new Symbol(Tabla_simbolos.r_poligono, yycolumn,yyline,new String(yytext()));}
-"("             {return new Symbol(tabla_simbolos.s_parentesisa, yycolumn,yyline,new String(yytext()));}
+"("             {return new Symbol(Tabla_simbolos.s_parentesisa, yycolumn,yyline,new String(yytext()));}
 {numero}		{return new Symbol(Tabla_simbolos.numero, yycolumn,yyline,new String(yytext()));}
 {entero}		{return new Symbol(Tabla_simbolos.numero_entero, yycolumn,yyline,new String(yytext()));}
 "+"				{return new Symbol(Tabla_simbolos.s_suma, yycolumn,yyline,new String(yytext()));}
@@ -47,7 +47,7 @@ entero = (numero)(punto)(numero)
 "negro"         {return new Symbol(Tabla_simbolos.r_negro, yycolumn,yyline,new String(yytext()));}
 ")"             {return new Symbol(Tabla_simbolos.s_parentesisc, yycolumn,yyline,new String(yytext()));}
 
-[ \t\r\f\n]+ { /* Se ignoran */}  
+[ \t\r\f\n]+ 	{ /* Se ignoran */}  
 
 /* CUAQUIER OTRO */ 
-.         {return new Symbol(Tabla_simbolos.error, yycolumn,yyline,new String(yytext()));} 
+.         		{return new Symbol(Tabla_simbolos.error, yycolumn,yyline,new String(yytext()));} 	
