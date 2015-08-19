@@ -224,11 +224,7 @@ private Linea linea;
 private Poligono poligono;
 
 //listas de los figuras encontradas
-public ArrayList<Circulo> lista_circulos = new ArrayList<Circulo>();
-private ArrayList<Cuadrado> lista_cuadrados = new ArrayList<Cuadrado>();
-private ArrayList<Rectangulo> lista_rectangulos = new ArrayList<Rectangulo>();
-private ArrayList<Linea> lista_lineas = new ArrayList<Linea>();
-private ArrayList<Poligono> lista_poligonos = new ArrayList<Poligono>();
+public ArrayList<Object> lista_figuras = new ArrayList<Object>();
 
 public boolean get_Estado(){
 	return correcto;
@@ -296,7 +292,10 @@ class CUP$Sintactico$actions {
           case 2: // GRAFICAS ::= GRAFICA FIGURAS GRAFICAS 
             {
               Object RESULT =null;
-
+		int fleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int fright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		Object f = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		 lista_figuras.add(f);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("GRAFICAS",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -305,7 +304,10 @@ class CUP$Sintactico$actions {
           case 3: // GRAFICAS ::= GRAFICA FIGURAS 
             {
               Object RESULT =null;
-
+		int fleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int fright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		Object f = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		 lista_figuras.add(f);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("GRAFICAS",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -326,7 +328,7 @@ class CUP$Sintactico$actions {
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		circulo = new Circulo((Integer)x,(Integer)y,(Integer)r,c.toString());lista_circulos.add(circulo);
+		circulo = new Circulo(((Integer)x).intValue(),((Integer)y).intValue(),((Integer)r).intValue(),c.toString()); RESULT = circulo;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("FIGURAS",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-9)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -347,7 +349,7 @@ class CUP$Sintactico$actions {
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		cuadrado = new Cuadrado((Integer)x,(Integer)y,(Integer)t,c.toString()); lista_cuadrados.add(cuadrado);
+		cuadrado = new Cuadrado((Integer)x,(Integer)y,(Integer)t,c.toString()); RESULT = cuadrado;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("FIGURAS",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-9)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -371,7 +373,7 @@ class CUP$Sintactico$actions {
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		rectangulo = new Rectangulo((Integer)x,(Integer)y,(Integer)a,(Integer)an,c.toString()); lista_rectangulos.add(rectangulo);
+		rectangulo = new Rectangulo((Integer)x,(Integer)y,(Integer)a,(Integer)an,c.toString()); RESULT = rectangulo;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("FIGURAS",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-11)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -395,7 +397,7 @@ class CUP$Sintactico$actions {
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		linea = new Linea((Integer)x,(Integer)y,(Integer)x2,(Integer)y2,c.toString()); lista_lineas.add(linea);
+		linea = new Linea((Integer)x,(Integer)y,(Integer)x2,(Integer)y2,c.toString()); RESULT = linea;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("FIGURAS",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-11)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -422,7 +424,7 @@ class CUP$Sintactico$actions {
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		poligono = new Poligono((Integer)x,(Integer)y,(Integer)l,(Integer)a,(Integer)ld,c.toString()); lista_poligonos.add(poligono);
+		poligono = new Poligono(((Integer)x).intValue(),(Integer)y,(Integer)l,(Integer)a,(Integer)ld,c.toString()); RESULT = poligono;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("FIGURAS",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-13)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -491,7 +493,7 @@ class CUP$Sintactico$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT = (Integer)a + (Integer)b;
+		RESULT = ((Integer)a).intValue() + ((Integer)b).intValue();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERANDOA",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -506,7 +508,7 @@ class CUP$Sintactico$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT = (Integer)a - (Integer)b;
+		RESULT = ((Integer)a).intValue() - ((Integer)b).intValue();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERANDOA",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -533,7 +535,7 @@ class CUP$Sintactico$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT = (Integer)a * (Integer)b;
+		RESULT = ((Integer)a).intValue() * ((Integer)b).intValue();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERANDOB",11, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -548,7 +550,7 @@ class CUP$Sintactico$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT = (Integer)a / (Integer)b;
+		RESULT = ((Integer)a).intValue() / ((Integer)b).intValue();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERANDOB",11, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -596,7 +598,7 @@ class CUP$Sintactico$actions {
 		int nleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object n = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT = n;
+		RESULT = Integer.parseInt(n.toString());
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERANDOF",13, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -608,7 +610,7 @@ class CUP$Sintactico$actions {
 		int nleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object n = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT = n;
+		RESULT = Integer.parseInt(n.toString());
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERANDOF",13, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

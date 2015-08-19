@@ -5,9 +5,9 @@ package Figuras;
  */
 public class Circulo {
     //PROPIEDADES DE LA CLASE CUADRADO
-    private int pos_x;
-    private int pos_y;
-    private int radio;
+    private Integer pos_x;
+    private Integer pos_y;
+    private Integer radio;
     private String color;
     //CONSTRUCTOR DE LA CLASE CUADRADO
     public Circulo(){
@@ -17,14 +17,14 @@ public class Circulo {
         color = null;
     }
 
-    public Circulo(int x, int y, int r, String c){
+    public Circulo(Integer x, Integer y, Integer r, String c){
         pos_x = x;
         pos_y = y;
         radio = r;
         color = c;
     }
 
-    public int getPos_y() {
+    public Integer getPos_y() {
         return pos_y;
     }
 
@@ -32,7 +32,7 @@ public class Circulo {
         this.pos_y = pos_y;
     }
 
-    public int getPos_x() {
+    public Integer getPos_x() {
         return pos_x;
     }
 
@@ -40,7 +40,7 @@ public class Circulo {
         this.pos_x = pos_x;
     }
 
-    public int getRadio() {
+    public Integer getRadio() {
         return radio;
     }
 

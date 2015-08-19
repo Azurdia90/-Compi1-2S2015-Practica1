@@ -12,17 +12,19 @@
         android:ems="10"
         android:id="@+id/eT_entrada"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:height="100dp"
+        android:width="800dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/boton_compilar"
         android:id="@+id/b_compilar"
-        android:layout_below="@+id/eT_entrada"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
         android:enabled="true"
         android:clickable="true"
-        android:onClick="click_compilar" />
+        android:onClick="click_compilar"
+        android:layout_below="@+id/eT_entrada"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

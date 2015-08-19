@@ -1,5 +1,6 @@
 package com.compi1.azurdia.practica1_201020331;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -62,10 +63,8 @@ public class Actividad_Principal extends AppCompatActivity {
     public void click_compilar(View v) {
         String entrada = eT_entrada.getText().toString();
         if (analizar(entrada) == true){
-            Circulo circulo;
-            circulo = analisis_sintactico.lista_circulos.get(0);
-            Toast toast = Toast.makeText(this, circulo.getColor(), Toast.LENGTH_SHORT);
-            toast.show();
+            Intent nuevo_layout = new Intent(Actividad_Principal.this,Actividad_graficas.class);
+            startActivity(nuevo_layout);
         }else{
             Toast toast = Toast.makeText(this, "No funciono", Toast.LENGTH_SHORT);
             toast.show();
