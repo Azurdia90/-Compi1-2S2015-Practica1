@@ -224,12 +224,15 @@ private Linea linea;
 private Poligono poligono;
 
 //listas de los figuras encontradas
-public ArrayList<Object> lista_figuras = new ArrayList<Object>();
+private ArrayList<Object> lista_figuras = new ArrayList<Object>();
 
 public boolean get_Estado(){
 	return correcto;
 }
 
+  public ArrayList<Object> getLista_figuras(){
+    return lista_figuras;
+  }
 
 /**Metodo al que se llama automáticamente ante algún error sintactico.*/ 
 public void syntax_error(Symbol s){ 

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.StringReader;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,8 +25,9 @@ public class Actividad_Principal extends AppCompatActivity {
 
     private Button b_compilar;
     private EditText eT_entrada;
-    Lexico analisis_lexico;
-    Sintactico analisis_sintactico;
+    private Lexico analisis_lexico;
+    private Sintactico analisis_sintactico;
+    public ArrayList<Object> lista_figuras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,10 @@ public class Actividad_Principal extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public ArrayList<Object> getLista_figuras(){
+        return lista_figuras;
+    }
+
     private void inicializar_componentntes(){
         b_compilar = (Button) findViewById(R.id.b_compilar);
         eT_entrada = (EditText) findViewById(R.id.eT_entrada);
@@ -80,6 +87,7 @@ public class Actividad_Principal extends AppCompatActivity {
             analisis_sintactico = new Sintactico(analisis_lexico);
             analisis_sintactico.parse();
             status = analisis_sintactico.get_Estado();
+            Logica.setLista_figuras(analisis_sintactico.getLista_figuras());
         } catch (Exception ex) {
             Logger.getLogger(Actividad_Principal.class.getName()).log(Level.SEVERE, null, ex);
         }//fin catch

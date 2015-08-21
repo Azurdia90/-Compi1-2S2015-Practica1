@@ -1,9 +1,12 @@
 package Figuras;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Cristian on 14/08/2015.
  */
-public class Circulo {
+public class Circulo{
     //PROPIEDADES DE LA CLASE CUADRADO
     private Integer pos_x;
     private Integer pos_y;
@@ -55,4 +58,5 @@ public class Circulo {
     public void setColor(String color) {
         this.color = color;
     }
+
 }//FIN DE LA CLASE CIRCULO
