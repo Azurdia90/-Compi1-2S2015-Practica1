@@ -3,6 +3,8 @@ package Analizadores;
 import Figuras.*;
 import java_cup.runtime.*; 
 import java.util.ArrayList;
+import android.graphics.Color;
+import android.graphics.Paint;
  
 parser code 
 {: 
@@ -15,6 +17,7 @@ private Cuadrado cuadrado;
 private Rectangulo rectangulo;
 private Linea linea;
 private Poligono poligono;
+private Paint color;
 
 //listas de los figuras encontradas
 private ArrayList<Object> lista_figuras = new ArrayList<Object>();
@@ -41,7 +44,7 @@ terminal r_graficar, r_circulo, r_cuadrado, r_rectangulo, r_linea, r_poligono, s
 s_suma, s_resta, s_multiplicacion, s_division, s_coma, r_azul, r_rojo, r_verde, r_amarillo, r_naranja, r_morado,
 r_cafe, r_negro, s_parentesisc; 
 
-non terminal INICIO, GRAFICAS, GRAFICA, FIGURAS, CIRCULO, CUADRADO, RECTANGULO, LINEA, POLIGONO, OPERACION, OPERANDOA, 
+non terminal INICIO, GRAFICAS, GRAFICA, FIGURAS, CIRCULO, CUADRADO, RECTANGULO, LINEA, POLIGONO, OPERANDOA, 
 OPERANDOB, OPERANDOC, OPERANDOF, COLOR;
   
 start with INICIO;  
@@ -52,15 +55,15 @@ GRAFICAS ::= GRAFICA FIGURAS:f GRAFICAS {: lista_figuras.add(f);:}
 			 |GRAFICA FIGURAS:f {: lista_figuras.add(f);:}; 
 
 FIGURAS ::=  CIRCULO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:r s_coma COLOR:c s_parentesisc
-			{:circulo = new Circulo(((Integer)x).intValue(),((Integer)y).intValue(),((Integer)r).intValue(),c.toString()); RESULT = circulo;:}
+			{:circulo = new Circulo(((Float)x).floatValue(),((Float)y).floatValue(),((Float)r).floatValue(),(Paint)c); RESULT = circulo;:}
 			|CUADRADO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:t s_coma COLOR:c s_parentesisc
-			{:cuadrado = new Cuadrado((Integer)x,(Integer)y,(Integer)t,c.toString()); RESULT = cuadrado;:}
+			{:cuadrado = new Cuadrado(((Float)x).floatValue(),((Float)y).floatValue(),((Float)t).floatValue(),(Paint)c); RESULT = cuadrado;:}
 			|RECTANGULO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:a s_coma OPERANDOA:an s_coma COLOR:c s_parentesisc
-			{:rectangulo = new Rectangulo((Integer)x,(Integer)y,(Integer)a,(Integer)an,c.toString()); RESULT = rectangulo;:}
+			{:rectangulo = new Rectangulo(((Float)x).floatValue(),((Float)y).floatValue(),((Float)a).floatValue(),((Float)an).floatValue(),(Paint)c); RESULT = rectangulo;:}
 			|LINEA s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:x2 s_coma OPERANDOA:y2 s_coma COLOR:c s_parentesisc
-			{:linea = new Linea((Integer)x,(Integer)y,(Integer)x2,(Integer)y2,c.toString()); RESULT = linea;:}			
+			{:linea = new Linea(((Float)x).floatValue(),((Float)y).floatValue(),((Float)x2).floatValue(),((Float)y2).floatValue(),(Paint)c); RESULT = linea;:}			
 			|POLIGONO s_parentesisa OPERANDOA:x s_coma OPERANDOA:y s_coma OPERANDOA:l s_coma OPERANDOA:a s_coma OPERANDOA:ld s_coma COLOR:c s_parentesisc
-			{:poligono = new Poligono(((Integer)x).intValue(),(Integer)y,(Integer)l,(Integer)a,(Integer)ld,c.toString()); RESULT = poligono;:};
+			{:poligono = new Poligono(((Float)x).floatValue(),((Float)y).floatValue(),((Float)l).floatValue(),((Float)a).floatValue(),Math.round(((Float)ld).floatValue()),(Paint)c); RESULT = poligono;:};
 
 GRAFICA ::=  r_graficar {:RESULT = "graficar";:};
 
@@ -74,25 +77,25 @@ LINEA ::=   r_linea {:RESULT = "linea";:};
 
 POLIGONO ::= r_poligono {:RESULT = "poligono";:};
 
-OPERANDOA ::= 	OPERANDOA:a s_suma OPERANDOB:b  {:RESULT = ((Integer)a).intValue() + ((Integer)b).intValue();:}
-			   |OPERANDOA:a s_resta OPERANDOB:b {:RESULT = ((Integer)a).intValue() - ((Integer)b).intValue();:}
+OPERANDOA ::= 	OPERANDOA:a s_suma OPERANDOB:b  {:RESULT = ((Float)a).floatValue() + ((Float)b).floatValue();:}
+			   |OPERANDOA:a s_resta OPERANDOB:b {:RESULT = ((Float)a).floatValue() - ((Float)b).floatValue();:}
 			   |OPERANDOB:n {:RESULT = n;:};
 
-OPERANDOB ::= 	OPERANDOB:a s_multiplicacion OPERANDOC:b  {:RESULT = ((Integer)a).intValue() * ((Integer)b).intValue();:}
-			   |OPERANDOB:a s_division OPERANDOC:b         {:RESULT = ((Integer)a).intValue() / ((Integer)b).intValue();:}
+OPERANDOB ::= 	OPERANDOB:a s_multiplicacion OPERANDOC:b  {:RESULT = ((Float)a).floatValue() * ((Float)b).floatValue();:}
+			   |OPERANDOB:a s_division OPERANDOC:b        {:RESULT = ((Float)a).floatValue() / ((Float)b).floatValue();:}
 			   |OPERANDOC:n {:RESULT = n;:};
 
-OPERANDOC ::=	s_parentesisa OPERACION:n s_parentesisc{:RESULT = n;:}
+OPERANDOC ::=	s_parentesisa OPERANDOA:n s_parentesisc{:RESULT = n;:}
 			   |OPERANDOF:n {:RESULT = n;:};
 
-OPERANDOF ::=	numero : n      {:RESULT = Integer.parseInt(n.toString());:}
-			   |numero_entero:n {:RESULT = Integer.parseInt(n.toString());:};
+OPERANDOF ::=	numero : n      {:RESULT = Float.parseFloat(n.toString());:}
+			   |numero_entero:n {:RESULT = Float.parseFloat(n.toString());:};
 
-COLOR ::=	r_azul      {:RESULT = "azul";:}
-		   |r_rojo      {:RESULT = "rojo";:}
-		   |r_verde     {:RESULT = "verde";:}
-		   |r_amarillo  {:RESULT = "amarillo";:}
-		   |r_naranja   {:RESULT = "naranja";:}
-		   |r_morado    {:RESULT = "morado";:}
-		   |r_cafe      {:RESULT = "cafe";:}
-		   |r_negro     {:RESULT = "negro";:};   
+COLOR ::=	r_azul      {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.BLUE); RESULT = color;:}  
+		   |r_rojo      {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.RED); RESULT = color;:}  
+		   |r_verde     {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.GREEN); RESULT = color;:}  
+		   |r_amarillo  {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.YELLOW); RESULT = color;:}  
+		   |r_naranja   {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.rgb(255,102,0)); RESULT = color;:}  
+		   |r_morado    {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.rgb(102,51,153)); RESULT = color;:}  
+		   |r_cafe      {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.rgb(121,82,39)); RESULT = color;:}  
+		   |r_negro     {:color = new Paint(); color.setAntiAlias(true); color.setColor(Color.BLACK); RESULT = color;:};   

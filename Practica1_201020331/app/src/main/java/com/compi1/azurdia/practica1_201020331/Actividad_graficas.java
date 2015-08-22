@@ -2,9 +2,6 @@ package com.compi1.azurdia.practica1_201020331;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -51,9 +48,11 @@ public class Actividad_graficas extends AppCompatActivity {
     }
 
     public class Graficadora extends View{
+        //METODO CONSTRUCTOR DE LA CLASE
         public Graficadora(Context context){
             super(context);
         }
+        //VARIABLES DE FIGURAS GEOMETRICAS A UTILIZAR
         Circulo circulo;
         Cuadrado cuadrado;
         Rectangulo rectangulo;
@@ -62,28 +61,24 @@ public class Actividad_graficas extends AppCompatActivity {
 
         @Override
         protected void onDraw(Canvas canvas){
-            Paint paint_rojo = new Paint();
-            paint_rojo.setAntiAlias(true);
-            paint_rojo.setColor(Color.RED);
-
+            //DEPENDIENDO DEL TIPO DE OBJETO SE GRAFICA LA FIGURA
             for (int cont =0; cont<Logica.getLista_figuras().size(); cont++  ){
                 if(Logica.getLista_figuras().get(cont) instanceof  Circulo){
                     circulo = (Circulo) Logica.getLista_figuras().get(cont);
-                    canvas.drawCircle(circulo.getPos_x(), circulo.getPos_y(), circulo.getRadio(), paint_rojo);
+                    canvas.drawCircle(circulo.getPos_x(), circulo.getPos_y(), circulo.getRadio(), circulo.getColor());
                 }else if(Logica.getLista_figuras().get(cont) instanceof Cuadrado){
-
-
+                    cuadrado = (Cuadrado)Logica.getLista_figuras().get(cont);
+                    canvas.drawRect(cuadrado.getPos_x(),cuadrado.getPos_y(),cuadrado.getTamaño(),cuadrado.getTamaño(), cuadrado.getColor());
                 }else if(Logica.getLista_figuras().get(cont) instanceof Rectangulo){
                     rectangulo = (Rectangulo)Logica.getLista_figuras().get(cont);
-                    canvas.drawRect(rectangulo.getPos_x(),rectangulo.getAlto(),rectangulo.getPos_y(),rectangulo.getAncho(),paint_rojo);
+                    canvas.drawRect(rectangulo.getPos_x(),rectangulo.getPos_y(),rectangulo.getAncho(),rectangulo.getAlto(),rectangulo.getColor());
                 }else if(Logica.getLista_figuras().get(cont) instanceof  Linea){
                     linea = (Linea)Logica.getLista_figuras().get(cont);
-                    canvas.drawLine(linea.getPos_x(),linea.getPos_y(),linea.getPos_x2(),linea.getPos_y2(),paint_rojo);
+                    canvas.drawLine(linea.getPos_x(),linea.getPos_y(),linea.getPos_x2(),linea.getPos_y2(),linea.getColor());
                 }else if(Logica.getLista_figuras().get(cont) instanceof  Poligono){
                     poligono = (Poligono)Logica.getLista_figuras().get(cont);
-                    
+                    canvas.drawPath(poligono.getPath(),poligono.getColor());
                 }
-
             }//fin del recorrido de la lista de figuras
         }//FIN DEL METODO SOBREESCRITO ONDRAW
     }//FIN DE LA CLASE PARA GRAFICAR EN EL NUEVO VIEW

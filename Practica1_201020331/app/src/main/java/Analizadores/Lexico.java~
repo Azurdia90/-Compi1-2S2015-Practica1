@@ -2,7 +2,6 @@
 
 package Analizadores;
 
-import com.compi1.azurdia.practica1_201020331.Actividad_Principal;
 import	java_cup.runtime.Symbol;  
 
 
@@ -670,7 +669,7 @@ public class Lexico implements java_cup.runtime.Scanner {
             }
           case 27: break;
           case 3: 
-            { return new Symbol(tabla_simbolos.s_parentesisa, yycolumn,yyline,new String(yytext()));
+            { return new Symbol(Tabla_simbolos.s_parentesisa, yycolumn,yyline,new String(yytext()));
             }
           case 28: break;
           case 4: 

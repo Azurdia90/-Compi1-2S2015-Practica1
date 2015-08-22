@@ -27,4 +27,17 @@
         android:layout_below="@+id/eT_entrada"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tV_resultados"
+        android:id="@+id/tV_resultados"
+        android:layout_below="@+id/b_compilar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:width="800dp"
+        android:height="300dp"
+        android:textSize="15dp"
+        android:background="#caf0ff" />
+
 </RelativeLayout>

@@ -4,6 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="boton_compilar">GRAFICAR</string>
+    <string name="tV_resultados">NO SE HAN ENCONTRADO ERRORES LEXICOS</string>
     <string name="title_activity_actividad_graficas">Resultados</string>
 
 </resources>

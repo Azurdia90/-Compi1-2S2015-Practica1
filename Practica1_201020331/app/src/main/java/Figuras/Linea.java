@@ -1,15 +1,18 @@
 package Figuras;
 
+import android.graphics.Paint;
+
 /**
  * Created by Cristian on 14/08/2015.
  */
 public class Linea {
     //PROPIEDDES DE LA CLASE LINEA
-    private int pos_x;
-    private int pos_y;
-    private int pos_x2;
-    private int pos_y2;
-    private String color;
+    private float pos_x;
+    private float pos_y;
+    private float pos_x2;
+    private float pos_y2;
+    private Paint color;
+
     //METODO CONSTRUCTOR DE LA CLASE
     public Linea(){
         this.pos_x = 0;
@@ -19,7 +22,7 @@ public class Linea {
         this.color = null;
     }
 
-    public Linea(int x, int y, int x2, int y2, String c){
+    public Linea(float x, float y, float x2, float y2, Paint c){
         this.pos_x = x;
         this.pos_y = y;
         this.pos_x2 = x2;
@@ -27,43 +30,43 @@ public class Linea {
         this.color = c;
     }
 
-    public int getPos_x() {
+    public float getPos_x() {
         return pos_x;
     }
 
-    public void setPos_x(int pos_x) {
+    public void setPos_x(float pos_x) {
         this.pos_x = pos_x;
     }
 
-    public int getPos_y() {
+    public float getPos_y() {
         return pos_y;
     }
 
-    public void setPos_y(int pos_y) {
+    public void setPos_y(float pos_y) {
         this.pos_y = pos_y;
     }
 
-    public int getPos_x2() {
+    public float getPos_x2() {
         return pos_x2;
     }
 
-    public void setPos_x2(int pos_x2) {
+    public void setPos_x2(float pos_x2) {
         this.pos_x2 = pos_x2;
     }
 
-    public int getPos_y2() {
+    public float getPos_y2() {
         return pos_y2;
     }
 
-    public void setPos_y2(int pos_y2) {
+    public void setPos_y2(float pos_y2) {
         this.pos_y2 = pos_y2;
     }
 
-    public String getColor() {
+    public Paint getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Paint color) {
         this.color = color;
     }
 }//FIN DE LA CLASE LINEA

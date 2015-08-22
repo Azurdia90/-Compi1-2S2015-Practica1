@@ -1,6 +1,5 @@
 package Analizadores;
 
-import com.compi1.azurdia.practica1_201020331.Actividad_Principal;
 import	java_cup.runtime.Symbol;  
 
 %%
@@ -18,7 +17,7 @@ import	java_cup.runtime.Symbol;
 numero = [0-9]+
 letra = [A-Za-z]
 punto = "."
-entero = (numero)(punto)(numero)
+entero = {numero}{punto}{numero}
 %%
 
 /* PALABRAS RESERVADAS */ 
