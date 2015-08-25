@@ -1,6 +1,9 @@
 package Analizadores;
 
 import	java_cup.runtime.Symbol;  
+import com.compi1.azurdia.practica1_201020331.Error_lexico;
+
+import java.util.ArrayList;
 
 %%
 
@@ -18,7 +21,25 @@ numero = [0-9]+
 letra = [A-Za-z]
 punto = "."
 entero = {numero}{punto}{numero}
+
+%{
+//codigo que se utilizara en el analizador lexico
+private ArrayList<Object> lista_errores_lexicos = new ArrayList<Object>();
+
+public ArrayList<Object> getLista_errores_lexicos(){
+	return lista_errores_lexicos;
+}
+
+//metodo que recopila los errores lexico y los guarda
+public void listar_error(String l, int x, int y){
+	Error_lexico error = new Error_lexico(l,x,y);
+	lista_errores_lexicos.add(error);
+}	
+
+%}
+
 %%
+
 
 /* PALABRAS RESERVADAS */ 
 
@@ -49,4 +70,5 @@ entero = {numero}{punto}{numero}
 [ \t\r\f\n]+ 	{ /* Se ignoran */}  
 
 /* CUAQUIER OTRO */ 
-.         		{return new Symbol(Tabla_simbolos.error, yycolumn,yyline,new String(yytext()));} 	
+.         		{listar_error(new String(yytext()),yyline,yycolumn);
+				return new Symbol(Tabla_simbolos.error, yycolumn,yyline,new String(yytext()));} 	

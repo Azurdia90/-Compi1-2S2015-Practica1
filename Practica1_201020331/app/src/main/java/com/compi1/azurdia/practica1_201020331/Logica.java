@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Logica {
 
     private static ArrayList<Object> lista_figuras;
-    private static ArrayList<Error_lexico> lista_errores_lexicos;
+    private static ArrayList<Object> lista_errores_lexicos;
 
     public static ArrayList<Object> getLista_figuras() {
         return lista_figuras;
@@ -18,11 +18,11 @@ public class Logica {
         Logica.lista_figuras = lista_figuras;
     }
 
-    public static ArrayList<Error_lexico> getLista_errores_lexicos() {
+    public static ArrayList<Object> getLista_errores_lexicos() {
         return lista_errores_lexicos;
     }
 
-    public static void setLista_errores_lexicos(ArrayList<Error_lexico> lista_errores_lexicos) {
+    public static void setLista_errores_lexicos(ArrayList<Object> lista_errores_lexicos) {
         Logica.lista_errores_lexicos = lista_errores_lexicos;
     }
 
